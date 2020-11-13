@@ -677,8 +677,8 @@ GameObject:
   - component: {fileID: 7839089767484695994}
   - component: {fileID: 7839089767484695997}
   - component: {fileID: 7839089767484695990}
-  - component: {fileID: 7839089767484695993}
   - component: {fileID: 7839089767484695992}
+  - component: {fileID: 1620023975397369795}
   m_Layer: 0
   m_Name: LegoMini_rigged_Shooter
   m_TagString: Untagged
@@ -756,30 +756,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7839089767484695993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2300186615175731870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 408ee4180ecf12443a076247c4724bd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keyboardControlled: 1
-  character: {fileID: 7839089767484695992}
-  rBody: {fileID: 7839089767484695994}
-  grounded: 1
-  animator: {fileID: 7839089767484695990}
-  idleAnimName: Idle
-  runAnimName: Run
-  shootAnimName: Shoot
-  jumpInAnimName: Jump_In
-  rollingAnimName: Roll
-  activateAnimName: Activate
-  animationState: 0
 --- !u!114 &7839089767484695992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -805,7 +781,34 @@ MonoBehaviour:
   closeCombat: 0
   closeCombatDamage: 1
   faction: 0
-  assignedCharacterTypes: 
+  assignedCharacterTypes: 00000000
+--- !u!114 &1620023975397369795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2300186615175731870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a88c6b8f6ed8661438dc27a0850e619e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyboardControlled: 1
+  character: {fileID: 7839089767484695992}
+  lastCheckpoint: {fileID: 0}
+  rBody: {fileID: 7839089767484695994}
+  grounded: 1
+  animator: {fileID: 7839089767484695990}
+  idleAnimName: Idle
+  runAnimName: Run
+  shootAnimName: Shoot
+  closeCombatAnimName: Attack
+  jumpInAnimName: Jump_In
+  rollingAnimName: Roll
+  activateAnimName: 0
+  actionsBlocked: 0
+  autoAimTarget: {fileID: 0}
 --- !u!1 &2429010079055616784
 GameObject:
   m_ObjectHideFlags: 0

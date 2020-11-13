@@ -69,6 +69,10 @@ public class PlayerControllerAdvanced : MonoBehaviour
             {
                 activateIn();
             }
+            else if (Input.GetKeyDown(KeyCode.Q))
+            {
+                GameManagement.instance.selectNextCharacter();
+            }
             else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
             {
                 lookLeft();

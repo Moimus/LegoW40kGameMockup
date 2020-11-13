@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class AIController : MonoBehaviour
 {
+
+    //TODO refactor this whole class
     public NavMeshAgent navAgent;
     public Character character = null;
     public float cooldownHandicap = 2.0f; 
@@ -85,21 +87,35 @@ public class AIController : MonoBehaviour
     void attackTarget()
     {
         AIState = (int)AIStates.attacking;
-        if (Vector3.Distance(transform.position, currentTarget.transform.position) > attackRadius || !hasClearSight())
+        try
         {
-            navAgent.SetDestination(currentTarget.transform.position);
-            setAnimationState((int)animationStates.running);
-        }
-        else
-        {
-            if(!animatorIsInTransition(shootAnimName))
+            if(currentTarget.transform != null)
             {
-                playAnimationWithInterruption(idleAnimName);
+                if (Vector3.Distance(transform.position, currentTarget.transform.position) > attackRadius || !hasClearSight())
+                {
+                    navAgent.SetDestination(currentTarget.transform.position);
+                    setAnimationState((int)animationStates.running);
+                }
+                else
+                {
+                    if (!animatorIsInTransition(shootAnimName))
+                    {
+                        playAnimationWithInterruption(idleAnimName);
+                    }
+                    navAgent.velocity = Vector3.zero;
+                    lookAtTarget();
+                    fire();
+                    navAgent.ResetPath();
+                }
             }
-            navAgent.velocity = Vector3.zero;
-            lookAtTarget();
-            fire();
-            navAgent.ResetPath();
+            else
+            {
+                idle();
+            }
+        }
+        catch (MissingReferenceException mre)
+        {
+            currentTarget = null;
         }
     }
 
