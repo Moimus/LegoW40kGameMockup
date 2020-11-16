@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterRoster
 {
     public int rosterPointer = 0; //currently selected character
-    List<GameObject> roster = new List<GameObject>();
+    public List<GameObject> roster = new List<GameObject>();
     public string playerCharacterFolder = "Prefabs/Minis/Player/";
 
     public CharacterRoster()

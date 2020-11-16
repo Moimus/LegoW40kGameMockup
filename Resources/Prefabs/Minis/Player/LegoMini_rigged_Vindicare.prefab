@@ -439,6 +439,19 @@ MonoBehaviour:
   closeCombatDamage: 1
   faction: 0
   assignedCharacterTypes: 00000000
+  miniMaterials:
+  - {fileID: 2100000, guid: 664a9357b8ff75e49bf4c235f584c368, type: 2}
+  - {fileID: 2100000, guid: 0f9c2391f9c009648bc0c13422af380e, type: 2}
+  - {fileID: 2100000, guid: 664a9357b8ff75e49bf4c235f584c368, type: 2}
+  - {fileID: 2100000, guid: 664a9357b8ff75e49bf4c235f584c368, type: 2}
+  - {fileID: 2100000, guid: 664a9357b8ff75e49bf4c235f584c368, type: 2}
+  - {fileID: 2100000, guid: 664a9357b8ff75e49bf4c235f584c368, type: 2}
+  - {fileID: 2100000, guid: 7336f531b921bb54e8201f768eb9b290, type: 2}
+  splatterMiniModel: {fileID: 6698707857007050126, guid: a1e654157279002489a7e9cf17a48071,
+    type: 3}
+  miniSpecialParts:
+  - {fileID: 7177803922236072895}
+  - {fileID: 7177803922007445208}
 --- !u!114 &7177803921544173894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,7 +476,7 @@ MonoBehaviour:
   closeCombatAnimName: Attack
   jumpInAnimName: Jump_In
   rollingAnimName: Roll
-  activateAnimName: 0
+  activateAnimName: Activate
   actionsBlocked: 0
   autoAimTarget: {fileID: 0}
 --- !u!1 &7177803921618852600

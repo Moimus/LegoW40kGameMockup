@@ -32,9 +32,12 @@ public class FollowCamera : MonoBehaviour
 
     void followPlayer()
     {
-        if(xFollow)
+        if(target != null)
         {
-            transform.position = new Vector3(target.position.x, transform.position.y, transform.position.z);
+            if (xFollow)
+            {
+                transform.position = new Vector3(target.position.x, transform.position.y, transform.position.z);
+            }
         }
     }
 }

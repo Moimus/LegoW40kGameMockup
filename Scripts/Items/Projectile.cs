@@ -42,6 +42,7 @@ public class Projectile : MonoBehaviour
         {
             IHittable hittable = other.transform.GetComponent<IHittable>();
             hittable.onHit(damage);
+            Destroy(gameObject);
         }
         if(other.transform.GetComponent<Projectile>() == null)
         {

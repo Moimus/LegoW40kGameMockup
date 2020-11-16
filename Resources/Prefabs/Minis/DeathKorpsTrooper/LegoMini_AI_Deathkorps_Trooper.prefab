@@ -1369,6 +1369,20 @@ MonoBehaviour:
   closeCombatDamage: 1
   faction: 1
   assignedCharacterTypes: 
+  miniMaterials:
+  - {fileID: 2100000, guid: 0e1c02da1bfc7b843af7487ebbf4634f, type: 2}
+  - {fileID: 2100000, guid: 3f24741cae206f0489b2fb243b904964, type: 2}
+  - {fileID: 2100000, guid: 4a897df9b50898742a51f08389bc0200, type: 2}
+  - {fileID: 2100000, guid: 4a897df9b50898742a51f08389bc0200, type: 2}
+  - {fileID: 2100000, guid: 0e1c02da1bfc7b843af7487ebbf4634f, type: 2}
+  - {fileID: 2100000, guid: 0e1c02da1bfc7b843af7487ebbf4634f, type: 2}
+  - {fileID: 2100000, guid: c8bc786129e895441a478bedb8633ff4, type: 2}
+  splatterMiniModel: {fileID: 6698707857007050126, guid: a1e654157279002489a7e9cf17a48071,
+    type: 3}
+  miniSpecialParts:
+  - {fileID: 6531024268569412305}
+  - {fileID: 6531024269262819795}
+  - {fileID: 6531024268146411876}
 --- !u!114 &7852450501526293958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1773,11 +1787,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4422664084901383556}
     m_Modifications:
-    - target: {fileID: 1553048939921486421, guid: 33b9ec04e4cb29b40bc75b7eb8b8be26,
-        type: 3}
-      propertyPath: cooldown
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5834198940612026096, guid: 33b9ec04e4cb29b40bc75b7eb8b8be26,
         type: 3}
       propertyPath: m_LocalPosition.x

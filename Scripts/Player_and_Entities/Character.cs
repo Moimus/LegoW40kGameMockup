@@ -32,6 +32,20 @@ public class Character : MonoBehaviour, IHittable
         robot = 3
     }
 
+    //Splatter Mini
+    /// <summary>
+    /// 0 = head, 1 = Body, 2 = ArmR, 3 = ArmL, 4 = HandR, 5 = HandL, 6 = Legs
+    /// </summary>
+    [Tooltip("0 = head, 1 = Body, 2 = ArmR, 3 = ArmL, 4 = HandR, 5 = HandL, 6 = Legs")]
+    public List<Material> miniMaterials = new List<Material>();
+    public GameObject splatterMiniModel = null;
+    /// <summary>
+    /// 0 = head, 1 = Body, 2 = ArmR, 3 = ArmL, 4 = HandR, 5 = HandL, 6 = Legs add all special parts like coats and hats here
+    /// </summary>
+    [Tooltip("0 = head, 1 = Body, 2 = ArmR, 3 = ArmL, 4 = HandR, 5 = HandL, 6 = Legs \n add all special parts like coats and hats here")]
+    public List<Transform> miniSpecialParts = new List<Transform>();
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,10 +82,13 @@ public class Character : MonoBehaviour, IHittable
         if(isPlayer)
         {
             PlayerControllerAdvanced pc = transform.GetComponent<PlayerControllerAdvanced>();
-            pc.respawn();
+            spawnSplatterModel();
+            //StartCoroutine(pc.respawn(2f));
+            GameManagement.instance.StartCoroutine(GameManagement.instance.respawnCharacter(this));
         }
         else
         {
+            spawnSplatterModel();
             Destroy(gameObject); //TODO
         }
     }
@@ -79,5 +96,14 @@ public class Character : MonoBehaviour, IHittable
     public void resetCharacter()
     {
         hpCurrent = hpMax;
+    }
+
+    public void spawnSplatterModel()
+    {
+        if(splatterMiniModel != null)
+        {
+            GameObject splatMod = Instantiate(splatterMiniModel, transform.position, transform.rotation);
+            splatMod.GetComponent<MiniSplatterer>().splatter(miniMaterials, miniSpecialParts);
+        }
     }
 }

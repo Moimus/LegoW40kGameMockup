@@ -13,6 +13,8 @@ public class GameManagement : MonoBehaviour
 
     public FollowCamera followCam = null;
 
+    public float respawnDelay = 2.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,21 @@ public class GameManagement : MonoBehaviour
     {
         instance = this;
         characterRoster = new CharacterRoster();
+    }
+
+    public IEnumerator respawnCharacter(Character oldCharacter)
+    {
+        oldCharacter.GetComponent<PlayerControllerAdvanced>().actionsBlocked = true;
+        GameObject newCharacter = Instantiate(characterRoster.roster[characterRoster.rosterPointer]);
+        playerController = newCharacter.GetComponent<PlayerControllerAdvanced>();
+        newCharacter.GetComponent<PlayerControllerAdvanced>().actionsBlocked = true;
+        newCharacter.transform.position = oldCharacter.gameObject.GetComponent<PlayerControllerAdvanced>().lastCheckpoint.transform.position;
+        newCharacter.transform.rotation = oldCharacter.gameObject.GetComponent<PlayerControllerAdvanced>().lastCheckpoint.transform.rotation;
+        Destroy(oldCharacter.gameObject);
+        yield return new WaitForSeconds(respawnDelay);
+        followCam.target = newCharacter.transform;
+        newCharacter.GetComponent<PlayerControllerAdvanced>().actionsBlocked = false;
+        yield return null;
     }
 
     public void selectNextCharacter()

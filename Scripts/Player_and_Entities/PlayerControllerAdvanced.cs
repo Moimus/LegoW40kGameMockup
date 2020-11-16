@@ -389,11 +389,13 @@ public class PlayerControllerAdvanced : MonoBehaviour
         return val;
     }
 
-    public void respawn()
+    public IEnumerator respawn(float delay)
     {
+        yield return new WaitForSeconds(delay);
         transform.position = lastCheckpoint.transform.position;
         transform.rotation = lastCheckpoint.transform.rotation;
         character.resetCharacter();
+        yield return null;
     }
 }
 

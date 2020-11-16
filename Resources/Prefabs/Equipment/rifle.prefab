@@ -56,14 +56,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7398399194181217507}
-  m_LocalRotation: {x: -0.12097764, y: 0.7166797, z: 0.6810961, w: 0.08856002}
+  m_LocalRotation: {x: -0.120975815, y: 0.71667904, z: 0.6810971, w: 0.08855953}
   m_LocalPosition: {x: -0.047581896, y: 0.03456901, z: 0.0641233}
   m_LocalScale: {x: 3.6402116, y: 3.6402123, z: 3.6402118}
   m_Children:
   - {fileID: 1553048940473370631}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -93.90099, y: 33.80899, z: 129.14}
 --- !u!33 &3291071096055194822
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -123,8 +123,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9a08be739d0f94cb595f315355ade8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perfectAccuracy: 0
   bulletSpawner: {fileID: 1553048940473370631}
   projectilePrefab: {fileID: 7941717196862498708, guid: 88d605c3c7dbddc49adaec978d6a7dd3,
     type: 3}
-  cooldown: 0.25
+  cooldown: 1
   cooldownRemaining: 0
+  maxDeviation: {x: 5, y: 5, z: 5}
