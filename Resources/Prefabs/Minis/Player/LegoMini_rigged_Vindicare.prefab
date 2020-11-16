@@ -424,8 +424,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11fff0192084bc64e8067df3896aff54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayer: 0
-  hpMax: 10
+  isPlayer: 1
+  hpMax: 4
+  hpCurrent: 4
   speed: 1.3
   rotationSpeed: 5
   jumpForce: 200

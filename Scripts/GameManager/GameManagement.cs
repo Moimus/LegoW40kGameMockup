@@ -37,11 +37,15 @@ public class GameManagement : MonoBehaviour
         Vector3 playerPosition = playerController.transform.position;
         Quaternion playerRotation = playerController.transform.rotation;
         PlayerControllerAdvanced oldController = playerController;
+        Checkpoint lastCheckpoint = oldController.lastCheckpoint;
+        int characterHP = oldController.character.hpCurrent;
 
         //load new characters and link to related objects
         GameObject newCharacter = characterRoster.getNextCharacter();
         GameObject newCharacterInstance = Instantiate(newCharacter, playerPosition, playerRotation);
         playerController = newCharacterInstance.GetComponent<PlayerControllerAdvanced>();
+        playerController.lastCheckpoint = lastCheckpoint;
+        playerController.character.hpCurrent = characterHP;
         followCam.target = newCharacterInstance.transform;
 
         //destroy old character and clean up

@@ -393,6 +393,7 @@ public class PlayerControllerAdvanced : MonoBehaviour
     {
         transform.position = lastCheckpoint.transform.position;
         transform.rotation = lastCheckpoint.transform.rotation;
+        character.resetCharacter();
     }
 }
 

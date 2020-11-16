@@ -6,7 +6,7 @@ public class Character : MonoBehaviour, IHittable
 {
     public bool isPlayer = false;
     public int hpMax = 4;
-    int hpCurrent = 4;
+    public int hpCurrent = 4;
     public float speed = 2f;
     public float rotationSpeed = 360f;
     public float jumpForce = 300;
@@ -46,7 +46,7 @@ public class Character : MonoBehaviour, IHittable
 
     public void init()
     {
-        hpCurrent = hpMax;
+
     }
 
     public void onHit(int damage)
@@ -74,5 +74,10 @@ public class Character : MonoBehaviour, IHittable
         {
             Destroy(gameObject); //TODO
         }
+    }
+
+    public void resetCharacter()
+    {
+        hpCurrent = hpMax;
     }
 }
