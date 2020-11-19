@@ -771,12 +771,12 @@ MonoBehaviour:
   isPlayer: 1
   hpMax: 4
   hpCurrent: 4
-  speed: 1.3
+  speed: 1.5
   rotationSpeed: 5
   jumpForce: 200
   doubleJump: 0
   usedDoubleJump: 0
-  rollSpeed: 3
+  rollSpeed: 2
   activationRange: 0.5
   gun: {fileID: 7839089768087484011}
   closeCombat: 0

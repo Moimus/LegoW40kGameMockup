@@ -1052,13 +1052,16 @@ MonoBehaviour:
   jumpForce: 200
   doubleJump: 0
   usedDoubleJump: 0
-  rollSpeed: 3
+  rollSpeed: 2
   activationRange: 0.5
   gun: {fileID: 0}
   closeCombat: 1
   closeCombatDamage: 1
   faction: 0
   assignedCharacterTypes: 03000000
+  miniMaterials: []
+  splatterMiniModel: {fileID: 0}
+  miniSpecialParts: []
 --- !u!1 &9065749196935891636
 GameObject:
   m_ObjectHideFlags: 0
