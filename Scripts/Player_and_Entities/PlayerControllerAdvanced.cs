@@ -176,6 +176,7 @@ public class PlayerControllerAdvanced : MonoBehaviour
     void closeCombatOut()
     {
         actionsBlocked = false;
+        idle();
     }
 
     void rollLoop()
