@@ -769,6 +769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 1
+  playerUI: {fileID: 0}
   hpMax: 4
   hpCurrent: 4
   speed: 1.5
@@ -811,6 +812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyboardControlled: 1
+  playerNumber: 1
   character: {fileID: 7839089767484695992}
   lastCheckpoint: {fileID: 0}
   rBody: {fileID: 7839089767484695994}
@@ -820,7 +822,9 @@ MonoBehaviour:
   runAnimName: Run
   shootAnimName: Shoot
   closeCombatAnimName: Attack
-  jumpInAnimName: Jump_In
+  jumpInAnimName: Jump_CloseCombat_In
+  jumpMidAnimName: Jump_CloseCombat_Mid
+  jumpLandAnimName: Jump_CloseCombat_Out
   rollingAnimName: Roll
   activateAnimName: Activate
   actionsBlocked: 0

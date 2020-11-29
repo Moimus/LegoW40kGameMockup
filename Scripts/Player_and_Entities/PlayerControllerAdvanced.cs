@@ -6,6 +6,10 @@ using UnityEngine;
 public class PlayerControllerAdvanced : MonoBehaviour
 {
     public bool keyboardControlled = true;
+    /// <summary>
+    /// 1 or 2
+    /// </summary>
+    public int playerNumber = 1;
     public Character character = null;
     public Checkpoint lastCheckpoint = null;
 
@@ -18,6 +22,8 @@ public class PlayerControllerAdvanced : MonoBehaviour
     public string shootAnimName = "Shoot";
     public string closeCombatAnimName = "Attack";
     public string jumpInAnimName = "Jump";
+    public string jumpMidAnimName = "Jump";
+    public string jumpLandAnimName = "Jump";
     public string rollingAnimName = "Roll";
     public string activateAnimName = "Activate";
     public bool actionsBlocked = false;
@@ -110,6 +116,10 @@ public class PlayerControllerAdvanced : MonoBehaviour
                 moveBackward();
 
             }
+            else if(Input.GetKeyDown(KeyCode.Backspace))
+            {
+                character.onHit(20);
+            }
             else
             {
                 idle();
@@ -130,7 +140,7 @@ public class PlayerControllerAdvanced : MonoBehaviour
         }
         else if (!grounded)
         {
-            playAnimationWithoutInterruption(jumpInAnimName);
+
         }
     }
 
@@ -160,9 +170,12 @@ public class PlayerControllerAdvanced : MonoBehaviour
 
     void closeCombatIn()
     {
-        autoAim(0.5f, 0.5f);
-        playAnimationWithoutInterruption(closeCombatAnimName);
-        actionsBlocked = true;
+        if(grounded)
+        {
+            autoAim(0.5f, 0.5f);
+            playAnimationWithoutInterruption(closeCombatAnimName);
+            actionsBlocked = true;
+        }
     }
 
     void closeCombatMid()
@@ -249,6 +262,10 @@ public class PlayerControllerAdvanced : MonoBehaviour
         {
             playAnimationWithoutInterruption(runAnimName);
         }
+        else if(!grounded && !animatorIsInTransition(jumpInAnimName))
+        {
+            playAnimationWithoutInterruption(jumpMidAnimName);
+        }
     }
 
     void moveBackward()
@@ -312,7 +329,7 @@ public class PlayerControllerAdvanced : MonoBehaviour
         Debug.DrawRay(transform.position, raycastHit.point * 10, Color.cyan);
         if (hit)
         {
-            if (Vector3.Distance(transform.position, raycastHit.point) < 0.1f)
+            if (Vector3.Distance(transform.position, raycastHit.point) < 0.05f)
             {
                 grounded = true;
                 if (character.doubleJump)
@@ -325,6 +342,12 @@ public class PlayerControllerAdvanced : MonoBehaviour
                 grounded = false;
             }
         }
+    }
+
+    //Animation event, on JumpIn out event
+    public void jumpInOut()
+    {
+        playAnimationWithoutInterruption(jumpMidAnimName);
     }
 
     void autoAim(float range, float radius)

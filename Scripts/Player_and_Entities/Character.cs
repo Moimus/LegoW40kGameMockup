@@ -5,6 +5,7 @@ using UnityEngine;
 public class Character : MonoBehaviour, IHittable
 {
     public bool isPlayer = false;
+    public PlayerUI playerUI = null;
     public int hpMax = 4;
     public int hpCurrent = 4;
     public float speed = 2f;
@@ -74,6 +75,11 @@ public class Character : MonoBehaviour, IHittable
         if(hpCurrent <= 0)
         {
             kill();
+        }
+
+        if(isPlayer && playerUI != null)
+        {
+            playerUI.updateHearts();
         }
     }
 

@@ -1404,8 +1404,8 @@ MonoBehaviour:
   shootAnimName: Shoot
   jumpInAnimName: Jump_In
   actionsBlocked: 0
-  scanRadius: 3
-  attackRadius: 4.5
+  scanRadius: 6
+  attackRadius: 5
   targetsInRange: []
   currentTarget: {fileID: 0}
   AIState: 0

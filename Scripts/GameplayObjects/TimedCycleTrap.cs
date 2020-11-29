@@ -96,5 +96,20 @@ public class TimedCycleTrap : Machine
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (currentState == (int)activationStates.on && other.GetComponent<IHittable>() != null && FX.activeInHierarchy)
+        {
+            try
+            {
+                trapHit(other.GetComponent<IHittable>());
+            }
+            catch
+            {
+
+            }
+        }
+    }
+
 
 }
