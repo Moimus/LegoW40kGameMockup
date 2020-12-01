@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7403270803480321110}
   m_Layer: 0
   m_Name: laser_projectile
-  m_TagString: Untagged
+  m_TagString: noProjectileTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   lifeTime: 1
-  speed: 30
+  speed: 15
   damage: 1
 --- !u!65 &5661391034858026667
 BoxCollider:
@@ -109,8 +109,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.11, y: 0.11, z: 0.54}
-  m_Center: {x: 0, y: 0, z: 0.26}
+  m_Size: {x: 0.11, y: 0.11, z: 0.19717512}
+  m_Center: {x: 0, y: 0, z: 0.24069543}
 --- !u!54 &7403270803480321110
 Rigidbody:
   m_ObjectHideFlags: 0

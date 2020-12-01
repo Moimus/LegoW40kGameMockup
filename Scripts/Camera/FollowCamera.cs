@@ -9,6 +9,10 @@ public class FollowCamera : MonoBehaviour
     public bool yFollow = false;
     public bool zFollow = false;
 
+    public float xOffset = 0;
+    public float yOffset = 0;
+    public float zOffset = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +40,12 @@ public class FollowCamera : MonoBehaviour
         {
             if (xFollow)
             {
-                transform.position = new Vector3(target.position.x, transform.position.y, transform.position.z);
+                transform.position = new Vector3(target.position.x + xOffset, transform.position.y + yOffset, transform.position.z + zOffset);
+            }
+
+            if (xFollow)
+            {
+                transform.position = new Vector3(transform.position.x + xOffset, target.position.y + yOffset, transform.position.z + zOffset);
             }
         }
     }

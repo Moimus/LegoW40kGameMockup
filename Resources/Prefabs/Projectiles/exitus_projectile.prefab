@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2318668616339097831}
   m_Layer: 0
   m_Name: exitus_projectile
-  m_TagString: Untagged
+  m_TagString: noProjectileTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   lifeTime: 1
-  speed: 40
+  speed: 15
   damage: 2
 --- !u!65 &576863614103790106
 BoxCollider:
@@ -109,8 +109,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.08, y: 0.07, z: 0.48}
-  m_Center: {x: 0, y: 0, z: 0.24}
+  m_Size: {x: 0.08, y: 0.07, z: 0.14477599}
+  m_Center: {x: 0, y: 0, z: 0.3062051}
 --- !u!54 &2318668616339097831
 Rigidbody:
   m_ObjectHideFlags: 0

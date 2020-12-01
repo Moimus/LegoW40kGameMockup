@@ -15,6 +15,8 @@ public class Character : MonoBehaviour, IHittable
     public bool usedDoubleJump = false;
     public float rollSpeed = 3f;
     public float activationRange = 0.5f;
+    public float grabRange = 0.5f;
+    public bool canGrab = true;
     public Gun gun = null;
     public bool closeCombat = false;
     public int closeCombatDamage = 1;

@@ -15,6 +15,7 @@ public class PlayerControllerAdvanced : MonoBehaviour
 
     public Rigidbody rBody = null;
     public bool grounded = true;
+    public bool grabbing = false;
 
     public Animator animator = null;
     public string idleAnimName = "Idle";
@@ -26,7 +27,11 @@ public class PlayerControllerAdvanced : MonoBehaviour
     public string jumpLandAnimName = "Jump";
     public string rollingAnimName = "Roll";
     public string activateAnimName = "Activate";
+    public string grabInAnimName = "Grab_In";
+    public string grabJumpAnimName = "Grab_Jump";
     public bool actionsBlocked = false;
+    public bool moveBlocked = false;
+    public bool rotationBlocked = false;
     public Transform autoAimTarget = null;
     enum states
     {
@@ -69,7 +74,17 @@ public class PlayerControllerAdvanced : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.E))
             {
-                rollIn();
+                if(grounded)
+                {
+                    rollIn();
+                }
+                else
+                {
+                    if(character.canGrab)
+                    {
+                        grab();
+                    }
+                }
             }
             else if (Input.GetKeyDown(KeyCode.F))
             {
@@ -136,7 +151,10 @@ public class PlayerControllerAdvanced : MonoBehaviour
     {
         if(grounded)
         {
-            playAnimationWithoutInterruption(idleAnimName);
+            if(!animatorIsInTransition(jumpInAnimName))
+            {
+                playAnimationWithoutInterruption(idleAnimName);
+            }
         }
         else if (!grounded)
         {
@@ -202,7 +220,7 @@ public class PlayerControllerAdvanced : MonoBehaviour
 
     void rollIn()
     {
-        if(rollingAnimName != "0" && grounded)
+        if(rollingAnimName != "0")
         {
             playAnimationWithoutInterruption(rollingAnimName);
             actionsBlocked = true;
@@ -257,45 +275,65 @@ public class PlayerControllerAdvanced : MonoBehaviour
 
     void moveForward()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * character.speed);
-        if(grounded)
+        if(!moveBlocked)
         {
-            playAnimationWithoutInterruption(runAnimName);
+            transform.Translate(Vector3.forward * Time.deltaTime * character.speed);
+            if (grounded)
+            {
+                playAnimationWithoutInterruption(runAnimName);
+            }
+            else if (!grounded && !animatorIsInTransition(jumpInAnimName))
+            {
+                playAnimationWithoutInterruption(jumpMidAnimName);
+            }
         }
-        else if(!grounded && !animatorIsInTransition(jumpInAnimName))
-        {
-            playAnimationWithoutInterruption(jumpMidAnimName);
-        }
+
     }
 
     void moveBackward()
     {
-        transform.Translate(-Vector3.forward * Time.deltaTime * character.speed);
-        if (grounded)
+        if (!moveBlocked)
         {
-            playAnimationWithoutInterruption(runAnimName);
+            transform.Translate(-Vector3.forward * Time.deltaTime * character.speed);
+            if (grounded)
+            {
+                playAnimationWithoutInterruption(runAnimName);
+            }
         }
+
     }
 
     void lookForward()
     {
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(transform.forward.x, 0, transform.forward.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * character.rotationSpeed);
+        if(!rotationBlocked)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(transform.forward.x, 0, transform.forward.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * character.rotationSpeed);
+        }
+
     }
 
     void lookLeft()
     {
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(-transform.right.x, 0, -transform.right.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * character.rotationSpeed);
+        if (!rotationBlocked)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(-transform.right.x, 0, -transform.right.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * character.rotationSpeed);
+        }
+
     }
 
     void lookRight()
     {
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(transform.right.x, 0, transform.right.z));
-        if (!animatorIsInTransition(rollingAnimName))
+        if (!rotationBlocked)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * character.rotationSpeed);
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(transform.right.x, 0, transform.right.z));
+            if (!animatorIsInTransition(rollingAnimName))
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * character.rotationSpeed);
+            }
         }
+
     }
 
     void jump()
@@ -306,6 +344,10 @@ public class PlayerControllerAdvanced : MonoBehaviour
             {
                 rBody.AddForce(transform.up * character.jumpForce);
                 playAnimationWithoutInterruption(jumpInAnimName);
+            }
+            else if(grabbing)
+            {
+                grabJump();
             }
         }
         else if (character.doubleJump)
@@ -329,7 +371,7 @@ public class PlayerControllerAdvanced : MonoBehaviour
         Debug.DrawRay(transform.position, raycastHit.point * 10, Color.cyan);
         if (hit)
         {
-            if (Vector3.Distance(transform.position, raycastHit.point) < 0.05f)
+            if (Vector3.Distance(transform.position, raycastHit.point) < 0.1f && raycastHit.collider.gameObject.tag != "noProjectileTrigger")
             {
                 grounded = true;
                 if (character.doubleJump)
@@ -342,6 +384,31 @@ public class PlayerControllerAdvanced : MonoBehaviour
                 grounded = false;
             }
         }
+    }
+
+    void grab()
+    {
+        GameObject grabPoint = getClosestGrabPointInRange();
+        if(grabPoint != null)
+        {
+            moveBlocked = true;
+            rotationBlocked = true;
+            transform.position = grabPoint.transform.position;
+            transform.rotation = grabPoint.transform.rotation;
+            playAnimationWithoutInterruption(grabInAnimName);
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            grabbing = true;
+        }
+    }
+
+    void grabJump()
+    {
+        moveBlocked = false;
+        rotationBlocked = false;
+        rBody.AddForce(transform.up * character.jumpForce);
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        playAnimationWithoutInterruption(grabJumpAnimName);
+        grabbing = false;
     }
 
     //Animation event, on JumpIn out event
@@ -389,6 +456,19 @@ public class PlayerControllerAdvanced : MonoBehaviour
         }
 
         return result;
+    }
+
+    GameObject getClosestGrabPointInRange()
+    {
+        List<Collider> inRange = new List<Collider>(Physics.OverlapSphere(transform.position, character.grabRange)).OrderBy(p => Vector3.Distance(p.transform.position, transform.position)).ToList<Collider>();
+        foreach(Collider collider in inRange)
+        {
+            if(collider.gameObject.GetComponent<IGrabbable>() != null)
+            {
+                return collider.gameObject;
+            }
+        }
+        return null;
     }
 
     //Doesn't interrupt current playing animation

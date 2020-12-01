@@ -1095,6 +1095,7 @@ MonoBehaviour:
   lastCheckpoint: {fileID: 0}
   rBody: {fileID: 2723260114197371837}
   grounded: 1
+  grabbing: 0
   animator: {fileID: 2723260114197371824}
   idleAnimName: Idle_CloseCombat
   runAnimName: Run_CloseCombat
@@ -1105,7 +1106,11 @@ MonoBehaviour:
   jumpLandAnimName: Jump_CloseCombat_Out
   rollingAnimName: Roll_CloseCombat
   activateAnimName: Activate
+  grabInAnimName: Grab_In
+  grabJumpAnimName: Grab_Jump
   actionsBlocked: 0
+  moveBlocked: 0
+  rotationBlocked: 0
   autoAimTarget: {fileID: 0}
 --- !u!114 &2723260114197371826
 MonoBehaviour:
@@ -1123,13 +1128,15 @@ MonoBehaviour:
   playerUI: {fileID: 0}
   hpMax: 4
   hpCurrent: 4
-  speed: 1.5
+  speed: 1.8
   rotationSpeed: 5
-  jumpForce: 200
+  jumpForce: 250
   doubleJump: 0
   usedDoubleJump: 0
   rollSpeed: 2
   activationRange: 0.5
+  grabRange: 0.2
+  canGrab: 1
   gun: {fileID: 0}
   closeCombat: 1
   closeCombatDamage: 1

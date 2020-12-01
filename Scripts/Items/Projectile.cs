@@ -38,15 +38,25 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.transform.GetComponent<IHittable>() != null)
+        if(other.tag != "noProjectileTrigger")
         {
-            IHittable hittable = other.transform.GetComponent<IHittable>();
-            hittable.onHit(damage);
-            Destroy(gameObject);
-        }
-        if(other.transform.GetComponent<Projectile>() == null)
-        {
-            Destroy(gameObject);
+            if (other.transform.GetComponent<IHittable>() != null)
+            {
+                if(other.GetComponent<Character>() != null)
+                {
+                    if(other.GetComponent<Character>() == owner)
+                    {
+                        return;
+                    }
+                }
+                IHittable hittable = other.transform.GetComponent<IHittable>();
+                hittable.onHit(damage);
+                Destroy(gameObject);
+            }
+            if (other.transform.GetComponent<Projectile>() == null)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
