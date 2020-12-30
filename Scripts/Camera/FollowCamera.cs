@@ -45,7 +45,7 @@ public class FollowCamera : MonoBehaviour
 
             if (xFollow)
             {
-                transform.position = new Vector3(transform.position.x + xOffset, target.position.y + yOffset, transform.position.z + zOffset);
+                transform.position = new Vector3(transform.position.x + xOffset, target.position.y + yOffset, transform.position.z + zOffset );
             }
         }
     }
